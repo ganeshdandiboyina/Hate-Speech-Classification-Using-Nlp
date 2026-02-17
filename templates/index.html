@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hate Speech Detection</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #aae5f6, #ee7dd7);
+            background-attachment: fixed, fixed;
+            background-size: cover, cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .input-container {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .input-container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+            color: #555;
+            font-weight: bold;
+        }
+
+        #text-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #text-input:focus {
+            border-color: #007BFF;
+        }
+
+        #analyze-button {
+            background: linear-gradient(to bottom, #007BFF, #0056b3);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #analyze-button:hover {
+            background: linear-gradient(to bottom, #0056b3, #00397a);
+            transform: scale(1.05);
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: bold;
+            border: 2px solid #ccc;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            transition: box-shadow 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <h1>Hate Speech Detection</h1>
+        <form id="hate-speech-form">
+            <label for="text-input">Enter text for detection:</label>
+            <textarea id="text-input" rows="4" cols="50"></textarea>
+            <button type="button" id="analyze-button" onclick="predictText()">Detect</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script>
+        async function predictText() {
+            let text = document.getElementById("text-input").value;
+            if (!text.trim()) {
+                document.getElementById("result").innerText = "Please enter text to analyze.";
+                return;
+            }
+            
+            let response = await fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "text": text })
+            });
+            
+            let result = await response.json();
+            document.getElementById("result").innerText = result.prediction || result.error;
+        }
+    </script>
+</body>
+</html>
