@@ -61,7 +61,7 @@ hate-speech-classification/
 
 💻 Installation & Setup
 Step 1: Clone the repository 📥
-git clone https://github.com/yourusername/hate-speech-classification.git
+git clone (https://github.com/ganeshdandiboyina/Hate-Speech-Classification-Using-Nlp)
 
 Step 2: Go to project directory 📂
 cd hate-speech-classification
@@ -85,10 +85,10 @@ Have a great day	✅ Non-Hate Speech
 📊 Model Performance
 
    Metric	       Score
-🎯 Accuracy	  92%
-📈 Precision	  0.91
-📉 Recall	       0.92
-⚖ F1-score	  0.91
+🎯 Accuracy	        92%
+📈 Precision	     0.91
+📉 Recall	        0.92
+⚖ F1-score	        0.91
 
 🚀 Future Improvements
 
